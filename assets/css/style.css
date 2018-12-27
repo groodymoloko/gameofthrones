@@ -34,10 +34,38 @@ body {
     color: white;
 }
 
+#translateInput {
+    width: 65%;
+    font-size: 10px;
+    background-color: rgb(236, 239, 244);
+}
+
+.form-inline {
+    margin: 10px;
+    background:  rgba(53, 50, 44, 0.7);
+    border-radius: 10px;
+
+}
+
+.modal-content {
+    background:  rgba(53, 50, 44, 0.7);
+}
+
 .jumbotron {
     background: none;
     color: yellow;
     padding: 10px;
+}
+
+.modal {
+    position: absolute;
+    top: 35%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10040;
+    overflow: auto;
+    overflow-y: auto;
 }
 
 #mainContainer {
