@@ -14,25 +14,13 @@
 
 <body>
 
-    <!-- <nav class="navbar transparent">
-      <button class="btn btn-outline-light my-2 my-sm-0" id="peopleButton" type="submit">People</button>
-      <button class="btn btn-outline-light my-2 my-sm-0" id="houseButton" type="submit">Houses</button>
-      <button class="btn btn-outline-light my-2 my-sm-0" id="monstersButton" type="submit">Monsters</button>
-      <button class="btn btn-outline-light my-2 my-sm-0" id="quoteButton" type="submit">Quotes</button>
-      <button class="btn btn-outline-light my-2 my-sm-0" id="placesButton" type="submit">Places</button>
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="input" id="searchInput" aria-label="Search">
-        <button class="btn btn-primary my-2 my-sm-0" id="searchButton" type="submit">Search</button>
-      </form>
-    </nav> -->
-
     <div class="full-width">
         <div class="container-fluid" id="navbarContainer">
             <nav class="navbar navbar-expand-md navbar-light mb-3 mt-0">
                 
                 <form class="form-inline">
                     <button class="btn btn-primary my-2 my-sm-0 mr-2" id="searchButton" type="submit">Search</button>
-                    <input class="form-control mr-sm-2" type="input" id="searchInput" aria-label="Search">
+                    <input class="form-control" type="input" id="searchInput" aria-label="Search">
                 </form> 
                 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -51,10 +39,10 @@
                         <button class="btn btn-outline-light my-2 my-sm-0 mr-2" id="monstersButton" type="submit">Monsters</button>
                         </li> 
                         <li class="nav-item">
-                        <button class="btn btn-outline-light my-2 my-sm-0 mr-2" id="quoteButton" type="submit">Quotes</button>
+                        <button class="btn btn-outline-light my-2 my-sm-0 mr-2" data-toggle="modal" data-target=".bd-example-modal-lg" id="translatorButton" type="submit">TRANSLATOR</button>
                         </li>
                         <li class="nav-item">
-                        <button class="btn btn-outline-light my-2 my-sm-0" id="placesButton" type="submit">Places</button>
+                        <button class="btn btn-outline-light my-2 my-sm-0" id="videosButton" type="submit">Videos</button>
                         </li>
                     </ul>    
                 </div>
@@ -62,7 +50,6 @@
             </nav>
         </div>
     </div>
-    
         
     <div class="jumbotron">
         <h1 class="display-4">Game of Thrones</h1>
@@ -92,9 +79,20 @@
 
     </div>
 
+    <div class="modal fade bd-example-modal-lg" id="translateModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <form class="form-inline">
+                <button class="btn btn-primary my-2 my-sm-0 mr-2" id="translateButton" type="submit">TRANSLATE!</button>
+                <input class="form-control" type="input" id="translateInput" placeholder="Type here to translate into Dothraki" aria-label="Translate">
+            </form>
+          </div>
+        </div>
+      </div>
+
     <footer class="footer">
       <div class="container">
-        <span>Copyright</span>
+        <span>2018</span>
       </div>
     </footer>
 
