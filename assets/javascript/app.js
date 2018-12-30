@@ -33,13 +33,13 @@ $(document).ready(function () {
             image: "assets/images/Blackfish.png"
         },
         "cersei": {
-            firstname: "Cersei", 
+            firstname: "Cersei",
             lastname: "Lannister",
             image: "assets/images/CerseiLannister.png"
         },
         "hound": {
             firstname: "Sandor  'The Hound'",
-            lastname:  "Clegane",
+            lastname: "Clegane",
             image: "assets/images/sandorclegane1.jpg"
         },
         "jaime": {
@@ -98,7 +98,7 @@ $(document).ready(function () {
             image: "assets/images/jorah.jpg"
         },
         "viserys": {
-            firstname: "Viserys", 
+            firstname: "Viserys",
             lastname: "Targaryen",
             image: "assets/images/viserys.jpg"
         },
@@ -179,7 +179,7 @@ $(document).ready(function () {
         },
         "ygritte": {
             firstname: "Ygritte",
-            lastname:"",
+            lastname: "",
             image: "assets/images/ygritte.jpg"
         },
         "gendry": {
@@ -188,17 +188,17 @@ $(document).ready(function () {
             image: "assets/images/gendry.jpg"
         },
         "tormund": {
-            firstname: "Tormund", 
+            firstname: "Tormund",
             lastname: "Giantsbane",
             image: "assets/images/tormund.jpg"
         },
         "brienne": {
-            firstname: "Brienne of", 
+            firstname: "Brienne of",
             lastname: "Tarth",
             image: "assets/images/brienne.jpg"
         },
         "ramsay": {
-            firstname: "Ramsay", 
+            firstname: "Ramsay",
             lastname: "Bolton",
             image: "assets/images/ramsay.jpg"
         },
