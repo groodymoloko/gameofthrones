@@ -42,7 +42,6 @@ body {
 
 .form-inline {
     margin: 10px;
-    background:  rgba(53, 50, 44, 0.7);
     border-radius: 10px;
 
 }
@@ -99,8 +98,8 @@ img {
     margin: 0;
 }
 
-tbody {
-
+.columnHead {
+    color: yellow;
 }
 
 .footer {
