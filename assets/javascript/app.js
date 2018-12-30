@@ -484,6 +484,9 @@ $(document).ready(function () {
         var chosenCharacter = $(this).attr("data-name");
         var queryURL = "https://got-quotes.herokuapp.com/quotes?char=" + chosenCharacter;
 
+        $('#modal-container').removeAttr('class').addClass('one');
+        $('body').addClass('modal-active');
+
         fetchQuote(queryURL);
 
         fetchTranslation(uri);
@@ -515,5 +518,11 @@ $(document).ready(function () {
 
 
     });
+
+    // code for clicking out of the modal
+    $('#modal-container').click(function(){
+        $(this).addClass('out');
+        $('body').removeClass('modal-active');
+      });
 
 });
