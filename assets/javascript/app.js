@@ -21,6 +21,16 @@ $(document).ready(function () {
 
     //create list of characters with properties (some characters will be in the quote database, others are local)
     var characters = {
+        "jon":{
+            firstname:"Jon",
+            lastname: "Snow",
+            image: "assets/images/jonsnow1.jpg",
+        },
+        "tyrion":{
+            firstname: "Tyrion",
+            lastname: "Lannister",
+            image: "assets/images/tyrionlannister1.jpg"
+        },
         "bronn": {
             firstname: "Bronn",
             lastname: "",
