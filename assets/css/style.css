@@ -1,7 +1,6 @@
 html {
     position: relative;
     min-height: 100%;
-    
 }
 
 body {
@@ -15,7 +14,6 @@ body {
     margin-left: 0px;
     word-spacing: 4px;
 }
-
 
 #navbarContainer {
     margin: 0px;
@@ -104,6 +102,15 @@ img {
     margin: 0;
 }
 
+.columnHead {
+    color: yellow;
+}
+
+#characterModal {
+    text-align: left;
+    
+}
+
 .footer {
     position: absolute;
     bottom: 0;
@@ -113,17 +120,11 @@ img {
     background:rgba(0,0,0,0.5);
     color: rgb(197, 191, 178);
 }
-#Qtable{
-    width: fit-content;
-    font-size: 15px;
-    background: rgba(82, 118, 209, 0.4);
-}
-@font-face {
-    font-family: "got";
-    src: url(fonts/got.ttf);
-}
 
-/* css rules for modal */
+/* css rules for main character modal */
+#characterModalGrid {
+    text-align: left;
+}
 
 #modal-container {
     position: fixed;
@@ -134,7 +135,7 @@ img {
     left: 0;
     transform: scale(0);
     z-index: 1;
-  }
+}
 
   #modal-container.one {
     transform: scaleY(0.01) scaleX(0);
@@ -159,23 +160,21 @@ img {
     vertical-align: middle;
   }
   #modal-container .modal-background .modal2 {
-    background: white;
+    background: rgba(105, 83, 83, 0.8);
     width: 80%;
     height: 400px;
     padding: 50px;
     display: inline-block;
-    border-radius: 3px;
+    border-radius: 10px;
     font-weight: 300;
     position: relative;
   }
   #modal-container .modal-background .modal2 h2 {
-    color: black;
     font-size: 25px;
     line-height: 25px;
     margin-bottom: 15px;
   }
   #modal-container .modal-background .modal2 p {
-    color: black;
     font-size: 18px;
     line-height: 22px;
   }
@@ -232,5 +231,10 @@ img {
       transform: scale(0);
     }
   }
-  
-  
+
+
+/* Game of Thrones font file */
+@font-face {
+    font-family: "got";
+    src: url(fonts/got.ttf);
+}
