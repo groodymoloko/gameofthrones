@@ -225,7 +225,7 @@ $(document).ready(function () {
         "missandei": {
             firstname: "Missandei",
             lastname: "",
-            image: "assets/images/missandei.webp"
+            image: "assets/images/missandei.jpeg"
         },
         "ellaria": {
             firstname: "Ellaria",
