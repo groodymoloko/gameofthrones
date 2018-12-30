@@ -26,7 +26,8 @@ $(document).ready(function(){
             image: "assets/images/jonsnow1.jpg"
         },
         "tyrion": {
-            name: "Tyrion",
+            firstname: "Tyrion",
+            lastname: "Lannister",
             image: "assets/images/tyrionlannister1.jpg"
         },
         "hound": {
@@ -34,7 +35,8 @@ $(document).ready(function(){
             image: "assets/images/sandorclegane1.jpg"
         },
         "bronn": {
-            name: "Bronn",
+            firstname: "Bronn",
+            lastname: "",
             image: "assets/images/bronn1.png"
             // quote: '"Sometimes there Is no happy choice, only one less grievous than the others.", "I do know some things, I know I love you. I know you love me. I have to go home now.", "We look up at the same stars and see such different things.", "If I fall, dont bring me back."'
         },
@@ -95,11 +97,13 @@ $(document).ready(function(){
 
     //copies the characters object so we can manipulate the keys in it and not affect the original
     var chosenPeopleObject = JSON.parse(JSON.stringify(characters));
+    //variable to store the text from user hitting search button entry
+    var userSearch = "";
 
     //creates the character cards from the characters object to put into the HTML
     function createCharactersDiv (character, characterIndex) {
         var charDiv = $("<div class='character' data-name='" + characterIndex + "'>");
-        var charName = $("<div class='characterName'>").text(character.name);
+        var charName = $("<div class='characterName'>").text(character.firstname);
         var charImage = $("<img alt='image' class='characterImage'>").attr('src', character.image);
         charDiv.append(charName).append(charImage);
         //remove the current character from the object so it does not have chance to repeat in next loop
@@ -115,9 +119,7 @@ $(document).ready(function(){
             chosenPeopleObject = JSON.parse(JSON.stringify(characters));
         }
         $('#charactersDiv').empty();
-        for (var i = 0; i < 5 && i <= Object.keys(chosenPeopleObject).length; i++) {
-            console.log(i);
-            console.log(Object.keys(chosenPeopleObject).length);
+        for (var i = 0; i < 5 && Object.keys(chosenPeopleObject).length !== 0; i++) {
             //turn object into array so we can index it with random number
             var characterArray = Object.keys(chosenPeopleObject);
             var characterIndex = characterArray[(Math.floor(Math.random() * characterArray.length))];
@@ -128,9 +130,9 @@ $(document).ready(function(){
     }
 
     //query the Game of Thrones Quote API to get a quote by the chosen character
-    function fetchQuote(queryURL) {
+    function fetchQuote(quoteURL) {
         $.ajax({
-            url: queryURL,
+            url: quoteURL,
             method: "GET"
         })
             // After data comes back from the request
@@ -139,6 +141,7 @@ $(document).ready(function(){
             var fetchedQuote = response.quote + " ~ " + response.character;
             $("#quote").text(fetchedQuote);
             addToTable(fetchedQuote);
+            $("#characterQuote").append(fetchedQuote);
 
             uri = "https://api.funtranslations.com/translate/dothraki.json?text=" + encodeURIComponent(fetchedQuote);
             });
@@ -157,6 +160,21 @@ $(document).ready(function(){
             console.log(translatedQuote);
             $("#translated").text(translatedQuote);
             addToTable(translatedQuote);
+            $("#translatedQuote").append(translatedQuote);
+            });
+    }
+
+     //query the Fire and Ice API to get specific chosen character information
+     function fetchCharInfo(charInfoURL) {
+        $.ajax({
+            url: charInfoURL,
+            method: "GET"
+        })
+            // After data comes back from the request
+            .then(function(response) {
+            // storing the data from the AJAX request in the results variable
+            var charTitles = response[0].titles;
+            $("#characterTitles").text(charTitles);
             });
     }
 
@@ -185,27 +203,23 @@ $(document).ready(function(){
             $("<td>").text(quote).addClass("col-lg-6"),
             $("<td>").text(translation).addClass("col-lg-6"),
         );
-        $("tbody").prepend(newRow);
+        $("#qTableBody").prepend(newRow);
     }
     
     //click event for user search (stored in Firebase)
     $("#searchButton").on("click", function(event) {
         event.preventDefault();
-        var userSearch = $("#searchInput").val().trim();
-
-        // Creates local "temporary" object for holding user search data
-        var newSearch = {
-            searchterm: newSearch
-        };
-
-        database.ref().push(userSearch);
+        userSearch = $("#searchInput").val().trim();
+        database.ref().push({ 
+            searchterm: userSearch
+        });
         $("#searchInput").val("");
-    });
 
-    //Database event for retrieving user search terms from Firebase and displaying them as recent searches in HTML
-    database.ref().on("child_added", function(childSnapshot) {
-        var userSearch = childSnapshot.val().searchterm;
-    
+        //Database event for retrieving user search terms from Firebase and displaying them as recent searches in HTML
+        database.ref().on("child_added", function(childSnapshot) {
+            $("#recent-table").append("<tr><td>" + (childSnapshot.val().searchterm) + "</td></tr>");
+            $(".row").show();
+        });
     });
 
     //click event for user pressing people button
@@ -228,13 +242,23 @@ $(document).ready(function(){
     $("#charactersDiv").on("click", ".character", function() {
 
         var chosenCharacter = $(this).attr("data-name");
-        var queryURL = "https://got-quotes.herokuapp.com/quotes?char=" + chosenCharacter;
+        var chosenCharFullName = characters[chosenCharacter].firstname + "+" + characters[chosenCharacter].lastname;
+        var quoteURL = "https://got-quotes.herokuapp.com/quotes?char=" + chosenCharacter;
+        var charInfoURL = "https://www.anapioficeandfire.com/api/characters?name=" + chosenCharFullName;
 
-        fetchQuote(queryURL);
+        fetchQuote(quoteURL);
         
-        fetchTranslation(uri);
+        // fetchTranslation(uri);
+
+        fetchCharInfo(charInfoURL);
 
         addToTable()
+        //create character div with name and image and send to modal
+        var charDiv = createCharactersDiv(characters[chosenCharacter], chosenCharacter);
+        $("#characterImage").empty();
+        $("#characterQuote").empty();
+        $("#characterImage").append(charDiv);
+
 
     });
 

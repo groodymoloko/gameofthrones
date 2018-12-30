@@ -12,6 +12,7 @@ body {
     margin-bottom: 50px; /* Margin bottom for sticky footer */
     margin-right: 0px;
     margin-left: 0px;
+    word-spacing: 4px;
 }
 
 #navbarContainer {
@@ -35,20 +36,22 @@ body {
 }
 
 #translateInput {
-    width: 65%;
-    font-size: 10px;
+    width: 100%;
+    font-size: 12px;
     background-color: rgb(236, 239, 244);
+    word-spacing: 4px;
 }
 
 .form-inline {
     margin: 10px;
-    background:  rgba(53, 50, 44, 0.7);
     border-radius: 10px;
+    justify-content: center;
 
 }
 
 .modal-content {
-    background:  rgba(53, 50, 44, 0.7);
+    background: none;
+    border: none;
 }
 
 .jumbotron {
@@ -99,8 +102,13 @@ img {
     margin: 0;
 }
 
-tbody {
+.columnHead {
+    color: yellow;
+}
 
+#characterModal {
+    text-align: left;
+    
 }
 
 .footer {
