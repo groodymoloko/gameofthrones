@@ -169,11 +169,13 @@ img {
     position: relative;
   }
   #modal-container .modal-background .modal2 h2 {
+    color: black;
     font-size: 25px;
     line-height: 25px;
     margin-bottom: 15px;
   }
   #modal-container .modal-background .modal2 p {
+    color: black;
     font-size: 18px;
     line-height: 22px;
   }
