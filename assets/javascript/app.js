@@ -22,186 +22,226 @@ $(document).ready(function () {
     //create list of characters with properties (some characters will be in the quote database, others are local)
     var characters = {
         "bronn": {
-            name: "Bronn",
+            firstname: "Bronn",
+            lastname: "",
             image: "assets/images/Bronn.jpg"
             // quote: '"Sometimes there Is no happy choice, only one less grievous than the others.", "I do know some things, I know I love you. I know you love me. I have to go home now.", "We look up at the same stars and see such different things.", "If I fall, dont bring me back."'
         },
         "brynden": {
-            name: "Brynden Tully",
+            firstname: "Brynden",
+            lastname: "Tully",
             image: "assets/images/Blackfish.png"
         },
         "cersei": {
-            name: "Cersei Lannister",
+            firstname: "Cersei", 
+            lastname: "Lannister",
             image: "assets/images/CerseiLannister.png"
         },
         "hound": {
-            name: "Sandor  'The Hound'  Clegane",
+            firstname: "Sandor  'The Hound'",
+            lastname:  "Clegane",
             image: "assets/images/sandorclegane1.jpg"
         },
         "jaime": {
-            name: "Jaime Lannister",
+            firstname: "Jaime",
+            lastname: "Lannister",
             image: "assets/images/Jaime.jpg"
         },
         "littlefinger": {
-            name: "Petyr Baelish",
+            firstname: "Petyr",
+            lastname: "Baelish",
             image: "assets/images/Littlefinger.png"
         },
         "olenna": {
-            name: "Olenna Tyrell",
+            firstname: "Olenna",
+            lastname: "Tyrell",
             image: "assets/images/Olenna.png"
         },
         "renly": {
-            name: "Renly Baratheon",
+            firstname: "Renly",
+            lastname: "Baratheon",
             image: "assets/images/Renly.png"
         },
         "tyrion": {
-            name: "Tyrion Lannister",
+            firstname: "Tyrion",
+            lastname: "Lannister",
             image: "assets/images/tyrionlannister1.jpg"
         },
         "varys": {
-            name: "Lord Varys",
+            firstname: "Lord",
+            lastname: "Varys",
             image: "assets/images/Varys.png"
         },
         "ned": {
-            name: "Eddard  'Ned'  Stark",
+            firstname: "Eddard  'Ned'",
+            lastname: "Stark",
             image: "assets/images/ned.jpg"
         },
         "robert": {
-            name: "Robert Baratheon",
+            firstname: "Robert",
+            lastname: "Baratheon",
             image: "assets/images/robert.jpg"
         },
         "catelyn": {
-            name: "Catelyn Stark",
+            firstname: "Catelyn",
+            lastname: "Stark",
             image: "assets/images/catelyn.jpg"
         },
         "daenerys": {
-            name: "Daenerys",
+            firstname: "Daenerys",
+            lastname: "Targaryen",
             image: "assets/images/daenerys.jpg"
         },
         "jorah": {
-            name: "Jorah Mormont",
+            firstname: "Jorah",
+            lastname: "Mormont",
             image: "assets/images/jorah.jpg"
         },
         "viserys": {
-            name: "Viserys Targaryen",
+            firstname: "Viserys", 
+            lastname: "Targaryen",
             image: "assets/images/viserys.jpg"
         },
         "sansa": {
-            name: "Sansa Stark",
+            firstname: "Sansa",
+            lastname: "Stark",
             image: "assets/images/sansa.jpg"
         },
         "arya": {
-            name: "Arya Stark",
+            firstname: "Arya",
+            lastname: "Stark",
             image: "assets/images/arya.jpg"
         },
         "robb": {
-            name: "Robb Stark",
+            firstname: "Robb",
+            lastname: "Stark",
             image: "assets/images/robb.jpg"
         },
         "theon": {
-            name: "Theon Greyjoy",
+            firstname: "Theon",
+            lastname: "Greyjoy",
             image: "assets/images/theon.jpg"
         },
         "bran": {
-            name: "Bran Stark",
+            firstname: "Bran",
+            lastname: "Stark",
             image: "assets/images/bran.jpg"
         },
         "joffrey": {
-            name: "Joffrey Baratheon",
+            firstname: "Joffrey",
+            lastname: "Baratheon",
             image: "assets/images/joffrey.jpg"
         },
         "davos": {
-            name: "Davos Seaworth",
+            firstname: "Davos",
+            lastname: "Seaworth",
             image: "assets/images/davos.jpg"
         },
         "samwell": {
-            name: "Samwell Tarly",
+            firstname: "Samwell",
+            lastname: "Tarly",
             image: "assets/images/samwell.jpg"
         },
         "stannis": {
-            name: "Stannis Baratheon",
+            firstname: "Stannis",
+            lastname: "Baratheon",
             image: "assets/images/stannis.jpg"
         },
         "melisandre": {
-            name: "Melisandre",
+            firstname: "Melisandre",
+            lastname: "",
             image: "assets/images/melisandre1.jpg"
         },
         "jeor": {
-            name: "Jeor Mormont",
+            firstname: "Jeor",
+            lastname: "Mormont",
             image: "assets/images/jeor.jpg"
         },
         "shae": {
-            name: "Shae",
+            firstname: "Shae",
+            lastname: "",
             image: "assets/images/shae.jpg"
         },
         "margaery": {
-            name: "Margaery Tyrell",
+            firstname: "Margaery",
+            lastname: "Tyrell",
             image: "assets/images/margaery.jpg"
         },
         "tywin": {
-            name: "Tywin Lannister",
+            firstname: "Tywin",
+            lastname: "Lannister",
             image: "assets/images/tywin.jpg"
         },
         "talisa": {
-            name: "Talisa Maegyr",
+            firstname: "Talisa",
+            lastname: "Maegyr",
             image: "assets/images/talisa.jpg"
         },
         "ygritte": {
-            name: "Ygritte",
+            firstname: "Ygritte",
+            lastname:"",
             image: "assets/images/ygritte.jpg"
         },
         "gendry": {
-            name: "Gendry",
+            firstname: "Gendry",
+            lastname: "",
             image: "assets/images/gendry.jpg"
         },
         "tormund": {
-            name: "Tormund Giantsbane",
+            firstname: "Tormund", 
+            lastname: "Giantsbane",
             image: "assets/images/tormund.jpg"
         },
         "brienne": {
-            name: "Brienne of Tarth",
+            firstname: "Brienne of", 
+            lastname: "Tarth",
             image: "assets/images/brienne.jpg"
         },
         "ramsay": {
-            name: "Ramsay Bolton",
+            firstname: "Ramsay", 
+            lastname: "Bolton",
             image: "assets/images/ramsay.jpg"
         },
         "gilly": {
-            name: "Gilly",
+            firstname: "Gilly",
+            lastname: "",
             image: "assets/images/gilly.jpg"
         },
         "daario": {
-            name: "Daario Naharis",
+            firstname: "Daario",
+            lastname: "Naharis",
             image: "assets/images/daario.jpg"
         },
         "missandei": {
-            name: "Missandei",
+            firstname: "Missandei",
+            lastname: "",
             image: "assets/images/missandei.webp"
         },
         "ellaria": {
-            name: "Ellaria Sand",
+            firstname: "Ellaria",
+            lastname: "Sand",
             image: "assets/images/ellaria.jpg"
         },
         "tommen": {
-            name: "Tommen Baratheon",
+            firstname: "Tommen",
+            lastname: "Baratheon",
             image: "assets/images/tommen.jpg"
         },
         "jaqen": {
-            name: "Jaqen H'ghar",
+            firstname: "Jaqen",
+            lastname: "H'ghar",
             image: "assets/images/jaqen.jpg"
         },
         "roose": {
-            name: "Roose Bolton",
+            firstname: "Roose",
+            lastname: "Bolton",
             image: "assets/images/roose.jpg"
         },
         "sparrow": {
-            name: "The High Sparrow",
+            firstname: "The High",
+            lastname: "Sparrow",
             image: "assets/images/sparrow.jpg"
         },
-
-
-
-
     }
 
     //copies the characters object so we can manipulate the keys in it and not affect the original
@@ -210,7 +250,7 @@ $(document).ready(function () {
     //creates the character cards from the characters object to put into the HTML
     function createCharactersDiv(character, characterIndex) {
         var charDiv = $("<div class='character' data-name='" + characterIndex + "'>");
-        var charName = $("<div class='characterName'>").text(character.name);
+        var charName = $("<div class='characterName'>").text(character.firstname + "  " + character.lastname);
         var charImage = $("<img alt='image' class='characterImage'>").attr('src', character.image);
         charDiv.append(charName).append(charImage);
         //remove the current character from the object so it does not have chance to repeat in next loop
