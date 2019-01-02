@@ -61,7 +61,17 @@
             </div>   
         </div>
         
-        <div class="row" id="qTable">
+    <!------------section for showing list of quotes----------->
+    <div id="tables">
+        <div class="btn-group" id="tableBtn" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary">Quotes</button>
+            <button type="button" class="btn btn-secondary">Recent Characters</button>
+        </div>
+        <div id="quoteTable"></div>
+        <div id="characterTable"></div>
+    </div>
+    <!---------------section for quote list ends--------------->
+        <!-- <div class="row" id="qTable">
             <table class="table table-sm table-hover col-lg-12" id='quote-table'>
                 <thead >
                   <tr class="row">
@@ -84,10 +94,10 @@
                 <tbody id="recentTableBody">
                 </tbody>
             </table>
-        </div>
-
+        </div> -->
     </div>
 
+    <!-----------HTML section for the character modal begins----------->
     <div class="modal fade bd-example-modal-lg" id="translateModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -97,68 +107,42 @@
             </form>
           </div>
         </div>
-      </div>
+    </div>
 
-      <!-- <div class="container" id="characterModal">
-          <div class="row">
-                <div class="col-lg-4">
-                    <div class="row" id="characterImage"></div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="row columnHead">Titles</div>
-                    <div class="row" id="characterTitles"></div>
-                    <div class="row columnHead">Age</div>
-                    <div class="row" id="characterAge"></div>
-                    <div class="row columnHead">Houses</div>
-                    <div class="row" id="characterHouse"></div>
-                    <div class="row columnHead">Aliases</div>
-                    <div class="row" id="characterAliases"></div>
-                    <div class="row columnHead">Children</div>
-                    <div class="row" id="characterChildren"></div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="row columnHead">Quote in English</div>
-                    <div class="row" id="characterQuote"></div>
-                    <div class="row columnHead">Quote in Dothraki</div>
-                    <div class="row" id="translatedQuote"></div>
-                    <div class="row" id="translateModalButton"></div>
-                </div>
-          </div>
-      </div> -->
-
-      <div id="modal-container">
-        <div class="modal-background">
-          <div class="modal2">
-            <div class="row" id="characterModalGrid">
-                <div class="col-lg-4">
-                    <div class="row" id="characterImage"></div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="row columnHead">Titles</div>
-                    <div class="row" id="characterTitles"></div>
-                    <div class="row columnHead">Age</div>
-                    <div class="row" id="characterAge"></div>
-                    <div class="row columnHead">Houses</div>
-                    <div class="row" id="characterHouse"></div>
-                    <div class="row columnHead">Aliases</div>
-                    <div class="row" id="characterAliases"></div>
-                    <div class="row columnHead">Children</div>
-                    <div class="row" id="characterChildren"></div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="row columnHead">Quote in English</div>
-                    <div class="row" id="characterQuote"></div>
-                    <div class="row columnHead">Quote in Dothraki</div>
-                    <div class="row" id="translatedQuote"></div>
-                    <div class="row" id="translateModalButton"></div>
-                </div>
+    <div id="modal-container">
+    <div class="modal-background">
+        <div class="modal2">
+        <div class="row" id="characterModalGrid">
+            <div class="col-lg-4">
+                <div class="row" id="characterImage"></div>
             </div>
-            <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
-                <rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
-            </svg>
-          </div>
+            <div class="col-lg-4">
+                <div class="row columnHead">Titles</div>
+                <div class="row" id="characterTitles"></div>
+                <div class="row columnHead">Age</div>
+                <div class="row" id="characterAge"></div>
+                <div class="row columnHead">Houses</div>
+                <div class="row" id="characterHouse"></div>
+                <div class="row columnHead">Aliases</div>
+                <div class="row" id="characterAliases"></div>
+                <div class="row columnHead">Children</div>
+                <div class="row" id="characterChildren"></div>
+            </div>
+            <div class="col-lg-4">
+                <div class="row columnHead">Quote in English</div>
+                <div class="row" id="characterQuote"></div>
+                <div class="row columnHead">Quote in Dothraki</div>
+                <div class="row" id="translatedQuote"></div>
+                <div class="row" id="translateModalButton"></div>
+            </div>
         </div>
-     </div>
+        <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
+            <rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
+        </svg>
+        </div>
+    </div>
+    </div>
+    <!-----------------------end of character modal---------------------->
 
     <footer class="footer">
       <div class="container">

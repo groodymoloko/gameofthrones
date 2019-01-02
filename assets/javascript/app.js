@@ -3,22 +3,21 @@ $(document).ready(function(){
 
     // Initialize Firebase
     var config = {
-        apiKey: "AIzaSyBpZXxTnENHTeGwIKLJwX8ZY0EG88ojysI",
-        authDomain: "uglymagentafinish.firebaseapp.com",
-        databaseURL: "https://uglymagentafinish.firebaseio.com",
-        projectId: "uglymagentafinish",
-        storageBucket: "",
-        messagingSenderId: "357761868557"
+        apiKey: "AIzaSyAyS_C42Om1AcosbxXN_McNv0FazjuRQ4U",
+        authDomain: "project1-3564d.firebaseapp.com",
+        databaseURL: "https://project1-3564d.firebaseio.com",
+        projectId: "project1-3564d",
+        storageBucket: "project1-3564d.appspot.com",
+        messagingSenderId: "953948840986"
     };
     firebase.initializeApp(config);
     var database = firebase.database();
 
     // variable to store ajax call URL based on quote text
     var uri = "";
-
     //hides page content until user selects something
     $(".row").hide();
-
+    $("#tables").hide();
     //create list of characters with properties (some characters will be in the quote database, others are local)
     var characters = {
         "jon":{
@@ -253,11 +252,14 @@ $(document).ready(function(){
             image: "assets/images/sparrow.jpg"
         }
     }
-
     //copies the characters object so we can manipulate the keys in it and not affect the original
     var chosenPeopleObject = JSON.parse(JSON.stringify(characters));
     //variable to store the text from user hitting search button entry
     var userSearch = "";
+    //variable that changes to the current character chosen
+    var chosenCharacter = "";
+    //object that will sent to firebase
+    var chosenCharObj = {}; 
 
     //creates the character cards from the characters object to put into the HTML
     function createCharactersDiv (character, characterIndex) {
@@ -281,6 +283,7 @@ $(document).ready(function(){
         for (var i = 0; i < 5 && Object.keys(chosenPeopleObject).length !== 0; i++) {
             //turn object into array so we can index it with random number
             var characterArray = Object.keys(chosenPeopleObject);
+            console.log(characterArray);
             var characterIndex = characterArray[(Math.floor(Math.random() * characterArray.length))];
             var character = chosenPeopleObject[characterIndex];
             var charDiv = createCharactersDiv(character, characterIndex);
@@ -298,8 +301,9 @@ $(document).ready(function(){
             .then(function(response) {
             // storing the data from the AJAX request in the results variable
             var fetchedQuote = response.quote + " ~ " + response.character;
+            chosenCharObj.quote = fetchedQuote;
+            
             $("#quote").text(fetchedQuote);
-            addToTable(fetchedQuote);
             $("#characterQuote").append(fetchedQuote);
 
             uri = "https://api.funtranslations.com/translate/dothraki.json?text=" + encodeURIComponent(fetchedQuote);
@@ -308,19 +312,19 @@ $(document).ready(function(){
     
     //query the Dothraki translator API to translate English text
     function fetchTranslation() {
-        $.ajax({
-            url: uri,
-            method: "GET"
-        })
-            // After data comes back from the request
-            .then(function(response) {
-            // storing the data from the AJAX request in the results variable
-            var translatedQuote = response.contents.translated;
-            console.log(translatedQuote);
-            $("#translated").text(translatedQuote);
-            addToTable(translatedQuote);
-            $("#translatedQuote").append(translatedQuote);
-            });
+        var translated = "this is a translated quote";
+        // $.ajax({
+        //     url: uri,
+        //     method: "GET"
+        // })
+        //     // After data comes back from the request
+        //     .then(function(response) {
+        //     // storing the data from the AJAX request in the results variable
+        //     var translatedQuote = response.contents.translated;
+        //     console.log(translatedQuote);
+        //     $("#translated").text(translatedQuote);
+        //     $("#translatedQuote").append(translatedQuote);
+        //     });
     }
 
      //query the Fire and Ice API to get specific chosen character information
@@ -333,6 +337,7 @@ $(document).ready(function(){
             .then(function(response) {
             // storing the data from the AJAX request in the results variable
             var charTitles = response[0].titles;
+            console.log('chartitles'+ charTitles);
             $("#characterTitles").text(charTitles);
             });
     }
@@ -354,17 +359,6 @@ $(document).ready(function(){
     //         });
     // }
 
-    function addToTable(q, t){
-        var quote = q;
-        var translation = t;
-
-        var newRow = $("<tr>").addClass("row").append(
-            $("<td>").text(quote).addClass("col-lg-6"),
-            $("<td>").text(translation).addClass("col-lg-6"),
-        );
-        $("#qTableBody").prepend(newRow);
-    }
-    
     //click event for user search (stored in Firebase)
     $("#searchButton").on("click", function(event) {
         event.preventDefault();
@@ -385,6 +379,7 @@ $(document).ready(function(){
     $("#peopleButton").on("click", function() {
         showCharacters();
         $(".row").show();
+        $("#tables").show();
     });
 
     //click event for user pressing translator button
@@ -400,7 +395,7 @@ $(document).ready(function(){
     //click event for user pressing a character picture
     $("#charactersDiv").on("click", ".character", function() {
 
-        var chosenCharacter = $(this).attr("data-name");
+        chosenCharacter = $(this).attr("data-name");
         var chosenCharFullName = characters[chosenCharacter].firstname + "+" + characters[chosenCharacter].lastname;
         var quoteURL = "https://got-quotes.herokuapp.com/quotes?char=" + chosenCharacter;
         var charInfoURL = "https://www.anapioficeandfire.com/api/characters?name=" + chosenCharFullName;
@@ -408,13 +403,13 @@ $(document).ready(function(){
         $('#modal-container').removeAttr('class').addClass('one');
         $('body').addClass('modal-active');
         
-        fetchQuote(quoteURL);
-        
-        // fetchTranslation(uri);
+        chosenCharObj.fullName = chosenCharFullName;
 
+        fetchQuote(quoteURL);       
+        console.log(chosenCharObj);
+        // fetchTranslation(uri);
         fetchCharInfo(charInfoURL);
 
-        addToTable()
         //create character div with name and image and send to modal
         var charDiv = createCharactersDiv(characters[chosenCharacter], chosenCharacter);
         $("#characterImage").empty();
