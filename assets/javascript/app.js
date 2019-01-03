@@ -259,7 +259,7 @@ $(document).ready(function(){
     //variable that changes to the current character chosen
     var chosenCharacter = "";
     //object that will sent to firebase
-    var chosenCharObj = {}; 
+    var quoteObj = {}; 
 
     //creates the character cards from the characters object to put into the HTML
     function createCharactersDiv (character, characterIndex) {
@@ -283,7 +283,7 @@ $(document).ready(function(){
         for (var i = 0; i < 5 && Object.keys(chosenPeopleObject).length !== 0; i++) {
             //turn object into array so we can index it with random number
             var characterArray = Object.keys(chosenPeopleObject);
-            console.log(characterArray);
+           // console.log(characterArray);
             var characterIndex = characterArray[(Math.floor(Math.random() * characterArray.length))];
             var character = chosenPeopleObject[characterIndex];
             var charDiv = createCharactersDiv(character, characterIndex);
@@ -301,12 +301,14 @@ $(document).ready(function(){
             .then(function(response) {
             // storing the data from the AJAX request in the results variable
             var fetchedQuote = response.quote + " ~ " + response.character;
-            chosenCharObj.quote = fetchedQuote;
             
             $("#quote").text(fetchedQuote);
             $("#characterQuote").append(fetchedQuote);
+            quoteObj.quote = fetchedQuote;
+            //chosenCharObj.quote = fetchedQuote;
 
             uri = "https://api.funtranslations.com/translate/dothraki.json?text=" + encodeURIComponent(fetchedQuote);
+            fetchTranslation();
             });
     }
     
@@ -325,6 +327,9 @@ $(document).ready(function(){
         //     $("#translated").text(translatedQuote);
         //     $("#translatedQuote").append(translatedQuote);
         //     });
+        quoteObj.translated = translated;
+        database.ref().push(quoteObj);
+
     }
 
      //query the Fire and Ice API to get specific chosen character information
@@ -342,23 +347,6 @@ $(document).ready(function(){
             });
     }
 
-    // function fetchVideos() {
-    //         var queryURL = 
-        
-    //     $.ajax({
-    //         url: queryURL,
-    //         method: "GET"
-    //     })
-    //         // After data comes back from the request
-    //         .then(function(response) {
-    //         // storing the data from the AJAX request in the results variable
-    //         var videoResults = response.contents.translated;
-    //         console.log(translatedQuote);
-    //         $("#translated").text(translatedQuote);
-    //         addToTable(translatedQuote);
-    //         });
-    // }
-
     //click event for user search (stored in Firebase)
     $("#searchButton").on("click", function(event) {
         event.preventDefault();
@@ -368,7 +356,7 @@ $(document).ready(function(){
         });
         $("#searchInput").val("");
 
-        //Database event for retrieving user search terms from Firebase and displaying them as recent searches in HTML
+    //Database event for retrieving user search terms from Firebase and displaying them as recent searches in HTML
         database.ref().on("child_added", function(childSnapshot) {
             $("#recent-table").append("<tr><td>" + (childSnapshot.val().searchterm) + "</td></tr>");
             $(".row").show();
@@ -400,16 +388,13 @@ $(document).ready(function(){
         var quoteURL = "https://got-quotes.herokuapp.com/quotes?char=" + chosenCharacter;
         var charInfoURL = "https://www.anapioficeandfire.com/api/characters?name=" + chosenCharFullName;
 
+        fetchQuote(quoteURL);       
+        //fetchTranslation(uri);
+        fetchCharInfo(charInfoURL);
+        console.log(quoteObj);
+        //
         $('#modal-container').removeAttr('class').addClass('one');
         $('body').addClass('modal-active');
-        
-        chosenCharObj.fullName = chosenCharFullName;
-
-        fetchQuote(quoteURL);       
-        console.log(chosenCharObj);
-        // fetchTranslation(uri);
-        fetchCharInfo(charInfoURL);
-
         //create character div with name and image and send to modal
         var charDiv = createCharactersDiv(characters[chosenCharacter], chosenCharacter);
         $("#characterImage").empty();
