@@ -17,7 +17,9 @@ $(document).ready(function(){
     var uri = "";
     //hides page content until user selects something
     $(".row").hide();
-    $("#tables").hide();
+    $("#tableBtnContainer").hide();
+    $("#quoteTable").hide();
+    //$("#quoteTable").hide();
     //create list of characters with properties (some characters will be in the quote database, others are local)
     var characters = {
         "jon":{
@@ -357,17 +359,24 @@ $(document).ready(function(){
         $("#searchInput").val("");
 
     //Database event for retrieving user search terms from Firebase and displaying them as recent searches in HTML
-        database.ref().on("child_added", function(childSnapshot) {
-            $("#recent-table").append("<tr><td>" + (childSnapshot.val().searchterm) + "</td></tr>");
-            $(".row").show();
-        });
+    });
+
+    database.ref().on("child_added", function(childSnapshot) {
+        console.log(childSnapshot.val().quote);
+        var newRow = $("<div>").addClass("row").append($("<div>").text(childSnapshot.val().quote).addClass("col-lg-6"),$("<div>").text(childSnapshot.val().translated).addClass("col-lg-6"));
+        $("#quoteTable").append(newRow);
+        // $("#recent-table").append("<tr><td>" + (childSnapshot.val().searchterm) + "</td></tr>");
+        // $(".row").show();
     });
 
     //click event for user pressing people button
     $("#peopleButton").on("click", function() {
         showCharacters();
         $(".row").show();
-        $("#tables").show();
+        $("#tableBtnContainer").show();
+    });
+    $("#tableBtn").on("click", function() {
+        $("#quoteTable").show();
     });
 
     //click event for user pressing translator button
