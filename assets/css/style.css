@@ -120,6 +120,13 @@ img {
     background:rgba(0,0,0,0.5);
     color: rgb(197, 191, 178);
 }
+/* css rules for the quote table */
+
+.tableContent {
+  background: rgba(105, 83, 83, 0.8);
+  margin: 15px 0 15px 0;
+  padding: 10px;
+}
 
 /* css rules for main character modal */
 #characterModalGrid {

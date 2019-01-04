@@ -17,9 +17,9 @@ $(document).ready(function(){
     var uri = "";
     //hides page content until user selects something
     $(".row").hide();
+    //hides table content until table button is clicked
     $("#tableBtnContainer").hide();
     $("#quoteTable").hide();
-    //$("#quoteTable").hide();
     //create list of characters with properties (some characters will be in the quote database, others are local)
     var characters = {
         "jon":{
@@ -306,8 +306,8 @@ $(document).ready(function(){
             
             $("#quote").text(fetchedQuote);
             $("#characterQuote").append(fetchedQuote);
+            //creates a property in the quote object for the selected quote
             quoteObj.quote = fetchedQuote;
-            //chosenCharObj.quote = fetchedQuote;
 
             uri = "https://api.funtranslations.com/translate/dothraki.json?text=" + encodeURIComponent(fetchedQuote);
             fetchTranslation();
@@ -329,9 +329,10 @@ $(document).ready(function(){
         //     $("#translated").text(translatedQuote);
         //     $("#translatedQuote").append(translatedQuote);
         //     });
+
+        //creates a tranlated property in the quote object for the translation of the selected quote
         quoteObj.translated = translated;
         database.ref().push(quoteObj);
-
     }
 
      //query the Fire and Ice API to get specific chosen character information
@@ -360,10 +361,17 @@ $(document).ready(function(){
 
     //Database event for retrieving user search terms from Firebase and displaying them as recent searches in HTML
     });
-
+    //adds the recent quotes from firebase to the page
     database.ref().on("child_added", function(childSnapshot) {
         console.log(childSnapshot.val().quote);
-        var newRow = $("<div>").addClass("row").append($("<div>").text(childSnapshot.val().quote).addClass("col-lg-6"),$("<div>").text(childSnapshot.val().translated).addClass("col-lg-6"));
+        var newRow = $("<div>").addClass("row");
+        var cell = $("<div>").addClass("col-lg-6");
+        var cell2 = $("<div>").addClass("col-lg-6");
+        var q = $("<div>").text(childSnapshot.val().quote).addClass("tableContent");
+        var t = $("<div>").text(childSnapshot.val().translated).addClass("tableContent");
+        cell.append(q);
+        cell2.append(t);
+        newRow.append(cell,cell2);
         $("#quoteTable").append(newRow);
         // $("#recent-table").append("<tr><td>" + (childSnapshot.val().searchterm) + "</td></tr>");
         // $(".row").show();
@@ -401,7 +409,6 @@ $(document).ready(function(){
         //fetchTranslation(uri);
         fetchCharInfo(charInfoURL);
         console.log(quoteObj);
-        //
         $('#modal-container').removeAttr('class').addClass('one');
         $('body').addClass('modal-active');
         //create character div with name and image and send to modal
