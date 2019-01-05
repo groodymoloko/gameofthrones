@@ -151,6 +151,7 @@ img {
 }
 /*css rules for house modal*/
 #houseResonse {
+    display: grid;
     
 }
 /* css rules for main character modal */
