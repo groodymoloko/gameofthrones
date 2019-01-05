@@ -156,26 +156,55 @@
                                         <img src="assets/images/houses/househornwood.jpg" alt="hornwood" width="300" height="200">
                                 </div>
 
-                                 <div class="gallery" id="crakehallBanner" data-name="cHouse Crakehall">
+                                 <div class="gallery" id="crakehallBanner" data-name="House Crakehall">
                                          <img src="assets/images/houses/housecrakehall.jpg" alt="crakehall" width="300" height="200">
                                  </div>
                     </div>   
                 </div>
     </div>
-
-
-
-
-
-
-
-<div id="Responses">
-    
-    <div id=houseResponseWords>Words Of the House:</div>
-    <div id=houseResponseLord>Current Lord Of the House:</div>
-    <div id=houseResponseRegion>Region of The House:</div>  
-     
-</div>
+    <div id="modal-container">
+            <div class="modal-background">
+              <div class="modal2">
+                <div class="row" id="characterModalGrid">
+                    <div class="col-lg-4">
+                        <div class="row" id="characterName"></div>
+                        <div class="row" id="characterImage"></div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="row columnHead">Titles</div>
+                        <div class="row columnData" id="characterTitles"></div>
+                        <div class="row columnHead">Born</div>
+                        <div class="row columnData" id="characterBorn"></div>
+                        <div class="row columnHead">House</div>
+                        <div class="row columnData" id="characterHouse"></div>
+                        <div class="row columnHead">Aliases</div>
+                        <div class="row columnData" id="characterAliases"></div>
+                        <div class="row columnHead">Spouse</div>
+                        <div class="row columnData" id="characterSpouse"></div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="row columnHead">Quote in Common Tongue</div>
+                        <div class="row columnData" id="characterQuote"></div>
+                        <div class="row columnHead">Quote in Dothraki</div>
+                        <div class="row columnData" id="translatedQuote"></div>
+                        <div class="row" id="translateModalButton"></div>
+                    </div>
+                </div>
+                <div id="houseResponse">
+                    <div id="chosenHouse"></div>
+                    <div id="houseResponseWords"></div>
+                    <div id="houseResponseLord"></div>
+                    <div id="houseResponseRegion"></div>
+                    <!-- <div id=houseResponseWords>Words Of the House:</div>
+                    <div id=houseResponseLord>Current Lord Of the House:</div>
+                    <div id=houseResponseRegion>Region of The House:</div>   -->
+                </div>
+                <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
+                    <rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
+                </svg>
+              </div>
+            </div>
+         </div>
 
 
 

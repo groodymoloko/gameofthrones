@@ -18,7 +18,9 @@ $(document).ready(function(){
 
     //hides page content until user selects something
     $(".row").hide();
-
+    $("#characterModalGrid").hide();
+    $("#houseResponse").hide();
+    
     //create list of characters with properties (some characters will be in the quote database, others are local)
     var characters = {
         "jon": {
@@ -548,7 +550,7 @@ $(document).ready(function(){
 
         $('#modal-container').removeAttr('class').addClass('one');
         $('body').addClass('modal-active');
-        
+        $("#characterModalGrid").show();
         fetchQuote(quoteURL, chosenCharacter);
 
         //retrieves information from APIs on character for the character modal
@@ -571,6 +573,8 @@ $(document).ready(function(){
     // code for clicking out of the modal
     $('#modal-container').click(function(){
         $(this).addClass('out');
+        $("#characterModalGrid").hide();
+        $("#houseResponse").hide();
         $('body').removeClass('modal-active');
     });
 
@@ -595,14 +599,19 @@ $(document).ready(function(){
                     $("#houseResponseLord").empty();
                     $("#houseResponseWords").empty();
                     $("#houseResponseRegion").empty();
+                    $("#chosenHouse").empty();
                     // storing the data from the AJAX request in the variables
                     var houseResponseWords = response.data.words;
                     var houseResponseRegion = response.data.region;
                     var houseResponseLord = response.data.currentLord;
                     //take response and write to div
-                    $("#houseResponseLord").append("Current Lord Of the House:", houseResponseLord);
-                    $("#houseResponseWords").append("Words Of the House:", houseResponseWords);
-                    $("#houseResponseRegion").append("Region of The House:", houseResponseRegion);
+                    $("#chosenHouse").append(chosenHouse);
+                    $("#houseResponseLord").append("Current Lord Of the House: ", houseResponseLord);
+                    $("#houseResponseWords").append("Words Of the House: ", houseResponseWords);
+                    $("#houseResponseRegion").append("Region of The House: ", houseResponseRegion);
+                    $('#modal-container').removeAttr('class').addClass('one');
+                    $('body').addClass('modal-active');
+                    $("#houseResponse").show();
                     // console.log("FINALITY", houseResponse);
                         });
                 }
