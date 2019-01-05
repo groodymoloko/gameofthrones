@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOT Quote Translator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="full-width">
+        <div class="container-fluid" id="navbarContainer">
+            <nav class="navbar navbar-expand-md navbar-light mb-3 mt-0">
+                
+                <form class="form-inline">
+                    <button class="btn btn-primary my-2 my-sm-0 mr-2" id="searchButton" type="submit">Search</button>
+                    <input class="form-control" type="input" id="searchInput" aria-label="Search">
+                </form> 
+                
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                        <button class="btn btn-outline-light my-2 my-sm-0 mr-2" id="peopleButton" type="submit"><a href="index.html">People</a></button>
+                        </li>
+                        <li class="nav-item">
+                        <button class="btn btn-outline-light my-2 my-sm-0 mr-2" id="houseButton" type="submit"><a href="houses.html">Houses</a></button>
+                        </li> 
+                        <li class="nav-item">
+                        <button class="btn btn-outline-light my-2 my-sm-0 mr-2" data-toggle="modal" data-target=".bd-example-modal-lg" id="translatorButton" type="submit">TRANSLATOR</button>
+                        </li>
+                        <li class="nav-item">
+                        <button class="btn btn-outline-light my-2 my-sm-0" id="videosButton" type="submit">Videos</button>
+                        </li>
+                    </ul>    
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+
+
+    <div class="jumbotron">
+        <h1 class="display-4">Game of Thrones</h1>
+        <p class="lead">Houses of Westoros</p>
+    </div>
+
+
+
+
+
+    <div class="container" id="houseContainer">
+
+
+            <div class="houserow" id="housesRow">
+                    <!-- <div class="col-lg-12"> -->
+                        <!-- <div id="housesDiv"></div> -->
+                        <style>
+                                div.gallery {
+                                  margin: 5px;
+                                  border: 1px solid #ccc;
+                                  float: left;
+                                  width: 360px;
+                                }
+                                
+                                div.gallery:hover {
+                                  border: 1px solid #777;
+                                }
+                                
+                                div.gallery img {
+                                  width: 100%;
+                                  height: auto;
+                                }
+                                
+                                div.desc {
+                                  padding: 15px;
+                                  text-align: center;
+                                }
+                                </style>
+                                
+                                
+
+                                <div class="gallery" id="starkBanner" data-name='House Stark'>
+                                        <img src="assets/images/houses/housestark.jpg" alt="starks"  width="300" height="200">
+                                </div>                                 
+                                
+                                <div class="gallery" id="arrynBanner" data-name="House Arryn">
+                                            <img src="assets/images/houses/housearryn.jpg" alt="arryn" width="300" height="200">
+                                </div> 
+
+
+                                <div class="gallery" id="martellBanner" data-name="House Martell">
+                                        <img src="assets/images/houses/housemartell.jpg" alt="martell" width="300" height="200">
+                                </div>
+
+
+                                <div class="gallery" id="cleganeBanner" data-name="House Clegane">
+                                    <img src="assets/images/houses/houseclegane.jpg" alt="clegane" width="300" height="200">
+                                </div>
+                                
+                                
+                                
+                                <div class="gallery" id="greyjoyBanner" data-name="House Greyjoy">
+                                      <img src="assets/images/houses/housegreyjoy.jpg" alt="greyjoy" width="300" height="200">
+                                 </div>
+                                
+
+                                <div class="gallery" id="karstarkBanner" data-name="House Karstark">
+                                        <img src="assets/images/houses/housekarstark.jpg" alt="karstark" width="300" height="200">
+                                </div>
+
+                                <div class="gallery" id="lannisterBanner" data-name="House Lannister">
+                                      <img src="assets/images/houses/houselannister.jpg" alt="lannister" width="300" height="200">
+                                 </div>
+                                
+
+                                <div class="gallery" id="baratheonBanner" data-name="House Baratheon">
+                                         <img src="assets/images/houses/housebaratheon.jpg" alt="baratheon" width="300" height="200">
+                                 </div>
+
+
+                                <div class="gallery" id="mormontBanner" data-name="House Mormont">
+                                        <img src="assets/images/houses/housemormont.jpg" alt="mormont" width="300" height="200">
+                                 </div>
+
+                                <div class="gallery" id="swyftBanner" data-name="House Swyft">
+                                        <img src="assets/images/houses/houseswyft.jpg" alt="swyft" width="300" height="200">
+                                </div>
+
+                                <div class="gallery" id="targaryenBanner" data-name="House Targaryen">
+                                        <img src="assets/images/houses/housetargaryen.jpg" alt="targaryen" width="300" height="200">
+                                </div>
+
+                                <div class="gallery" id="tullyBanner" data-name="House Tully">
+                                     <img src="assets/images/houses/housetully.jpg" alt="tully" width="300" height="200">         
+                                </div>
+
+                                <div class="gallery" id="tyrellBanner" data-name="House Tyrell">
+                                        <img src="assets/images/houses/housetyrell.jpg" alt="tyrell" width="300" height="200">
+                                </div>
+
+                                <div class="gallery" id="westerlingBanner" data-name="House Westerling">
+                                         <img src="assets/images/houses/housewesterling.jpg" alt="westerling" width="300" height="200">
+                                 </div>
+
+                                <div class="gallery" id="hornwoodBanner" data-name="House Hornwood">
+                                        <img src="assets/images/houses/househornwood.jpg" alt="hornwood" width="300" height="200">
+                                </div>
+
+                                 <div class="gallery" id="crakehallBanner" data-name="House Crakehall">
+                                         <img src="assets/images/houses/housecrakehall.jpg" alt="crakehall" width="300" height="200">
+                                 </div>
+                    </div>   
+                </div>
+    </div>
+    <div id="modal-container">
+            <div class="modal-background">
+              <div class="modal2">
+                <div class="row" id="characterModalGrid">
+                    <div class="col-lg-4">
+                        <div class="row" id="characterName"></div>
+                        <div class="row" id="characterImage"></div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="row columnHead">Titles</div>
+                        <div class="row columnData" id="characterTitles"></div>
+                        <div class="row columnHead">Born</div>
+                        <div class="row columnData" id="characterBorn"></div>
+                        <div class="row columnHead">House</div>
+                        <div class="row columnData" id="characterHouse"></div>
+                        <div class="row columnHead">Aliases</div>
+                        <div class="row columnData" id="characterAliases"></div>
+                        <div class="row columnHead">Spouse</div>
+                        <div class="row columnData" id="characterSpouse"></div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="row columnHead">Quote in Common Tongue</div>
+                        <div class="row columnData" id="characterQuote"></div>
+                        <div class="row columnHead">Quote in Dothraki</div>
+                        <div class="row columnData" id="translatedQuote"></div>
+                        <div class="row" id="translateModalButton"></div>
+                    </div>
+                </div>
+                <div id="houseResponse">
+                    <div id="chosenHouse"></div>
+                    <div id="houseResponseWords"></div>
+                    <div id="houseResponseLord"></div>
+                    <div id="houseResponseRegion"></div>
+                    <!-- <div id=houseResponseWords>Words Of the House:</div>
+                    <div id=houseResponseLord>Current Lord Of the House:</div>
+                    <div id=houseResponseRegion>Region of The House:</div>   -->
+                </div>
+                <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
+                    <rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
+                </svg>
+              </div>
+            </div>
+         </div>
+
+
+
+    <footer class="footer">
+      <div class="container">
+        <span>GOT Portal Copyright 2018</span>
+      </div>
+    </footer>
+
+    <script src="assets/javascript/app.js"></script>
+    <script src="assets/javascript/backstretch.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $.backstretch(['assets/images/dragon3.jpg', 'assets/images/ghost1.png', 'assets/images/dothraki1.jpg', 'assets/images/tyrion1.jpg', 'assets/images/whitewalker1.jpg', 'assets/images/queen1.jpg', 'assets/images/stark1.jpg', 'assets/images/dragon2.jpg', 'assets/images/battle1.jpg', 'assets/images/dragon1.jpg'], {
+                duration: 10000,
+                fade: 900
+            });
+        });
+    </script>
+      
+</body>
+
+</html>

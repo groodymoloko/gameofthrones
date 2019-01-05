@@ -1,14 +1,88 @@
+html {
+    position: relative;
+    min-height: 100%;
+    box-sizing: border-box;
+    /* margin-left: calc(100vw - 100%); */
+    /* margin-right: 0; */
+}
+
 body {
     margin: auto;
     text-align: center;
     color: white;
-    font-size: 20px;
+    font-size: 12px;
     font-family: got;
+    margin-bottom: 50px; /* Margin bottom for sticky footer */
+    margin-right: 0px;
+    margin-left: 0px;
+    word-spacing: 4px;
 }
+
+html ::-webkit-scrollbar {
+  display: none;
+}
+
+#navbarContainer {
+    margin: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.navbar{
+    background:rgba(0,0,0,0.3) !important;
+}
+
+.navbar-toggler {
+    background:white !important;
+    color: black;
+}
+
+
+
+#searchInput {
+    background:rgba(0,0,0,0.3) !important;
+    color: white;
+}
+
+#translateInput {
+    width: 100%;
+    font-size: 12px;
+    background-color: rgb(236, 239, 244);
+    word-spacing: 4px;
+}
+
+.form-inline {
+    margin: 10px;
+    border-radius: 10px;
+    justify-content: center;
+
+}
+
+.modal-content {
+    background: none;
+    border: none;
+}
+
 .jumbotron {
     background: none;
-    color: white;
+    color: yellow;
     padding: 10px;
+}
+
+.modal {
+    position: absolute;
+    top: 35%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10040;
+    overflow: auto;
+    overflow-y: auto;
+}
+
+#mainContainer {
+    margin: 0px;
+    padding: 0px;
 }
 
 img {
@@ -27,16 +101,180 @@ img {
 
 #quote {
     margin: 20px;
-    background: rgba(82, 118, 209, 0.4);
     padding: 10px;
     border-radius: 10px;
+}
+
+#quoteTable {
+  display: none;
+  height: 500px;
+  width: 1000px;
+  overflow-y: auto;
+}
+
+#quoteTable ::-webkit-scrollbar {
+  display: block;
+}
+
+#qTable{
+    font-size: 12px;
+    background:  rgba(53, 50, 44, 0.7);
+    margin: 0;
+}
+
+.columnHead {
+    color: yellow;
+    padding-left: 8px;
+    margin-top: 5px;
+}
+
+.columnData {
+    padding-left: 8px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px; /* Fixed height of the sticky footer */
+    line-height: 50px; /* Vertically center footer text */
+    background:rgba(0,0,0,0.5);
+    color: rgb(197, 191, 178);
+}
+
+/* css rules for the quote table */
+.tableContent {
+  background: rgba(73, 106, 145, 0.8);
+  margin: 5px 0 5px 0;
+  padding: 10px;
+  border-radius: 10px;
+}
+/*css rules for house modal*/
+#houseResonse {
+    display: grid;
     
 }
-#Qtable{
-    width: fit-content;
-    font-size: 15px;
-    background: rgba(82, 118, 209, 0.4);
+/* css rules for main character modal */
+#characterModalGrid {
+    text-align: left;
 }
+
+#characterName {
+  font-size: 16px;
+  justify-content: center;
+  background-color: grey;
+  width: 250px;
+  border-radius: 10px;
+  padding: 4px;
+}
+
+#modal-container {
+    position: fixed;
+    display: table;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    transform: scale(0);
+    z-index: 1;
+}
+
+  #modal-container.one {
+    transform: scaleY(0.01) scaleX(0);
+    animation: unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+  #modal-container.one .modal-background .modal2 {
+    transform: scale(0);
+    animation: zoomIn 0.5s 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+  #modal-container.one.out {
+    transform: scale(1);
+    animation: unfoldOut 1s 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+  #modal-container.one.out .modal-background .modal2 {
+    animation: zoomOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+
+  #modal-container .modal-background {
+    display: table-cell;
+    background: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    vertical-align: middle;
+  }
+  #modal-container .modal-background .modal2 {
+    background: rgba(73, 106, 145, 0.8);
+    width: 80%;
+    padding: 50px;
+    display: inline-block;
+    border-radius: 10px;
+    font-weight: 300;
+    position: relative;
+  }
+  #modal-container .modal-background .modal2 h2 {
+    font-size: 25px;
+    line-height: 25px;
+    margin-bottom: 15px;
+  }
+  #modal-container .modal-background .modal2 p {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  #modal-container .modal-background .modal2 .modal-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+  }
+  #modal-container .modal-background .modal2 .modal-svg rect {
+    stroke: #fff;
+    stroke-width: 2px;
+    stroke-dasharray: 778;
+    stroke-dashoffset: 778;
+  }
+
+  @keyframes unfoldIn {
+    0% {
+      transform: scaleY(0.005) scaleX(0);
+    }
+    50% {
+      transform: scaleY(0.005) scaleX(1);
+    }
+    100% {
+      transform: scaleY(1) scaleX(1);
+    }
+  }
+  @keyframes unfoldOut {
+    0% {
+      transform: scaleY(1) scaleX(1);
+    }
+    50% {
+      transform: scaleY(0.005) scaleX(1);
+    }
+    100% {
+      transform: scaleY(0.005) scaleX(0);
+    }
+  }
+  @keyframes zoomIn {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes zoomOut {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+
+
+/* Game of Thrones font file */
 @font-face {
     font-family: "got";
     src: url(fonts/got.ttf);
