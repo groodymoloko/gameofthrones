@@ -606,9 +606,9 @@ $(document).ready(function(){
                     var houseResponseLord = response.data.currentLord;
                     //take response and write to div
                     $("#chosenHouse").append(chosenHouse);
-                    $("#houseResponseLord").append("Current Lord Of the House: ", houseResponseLord);
-                    $("#houseResponseWords").append("Words Of the House: ", houseResponseWords);
-                    $("#houseResponseRegion").append("Region of The House: ", houseResponseRegion);
+                    $("#houseResponseLord").append("<b>", "Current Lord Of the House: ", houseResponseLord, "<b>" );
+                    $("#houseResponseWords").append("<b>", "Words Of the House: ", houseResponseWords), "<b>";
+                    $("#houseResponseRegion").append("<b>", "Region of The House: ", houseResponseRegion), "<b>";
                     $('#modal-container').removeAttr('class').addClass('one');
                     $('body').addClass('modal-active');
                     $("#houseResponse").show();

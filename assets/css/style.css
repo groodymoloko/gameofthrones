@@ -168,6 +168,15 @@ img {
   padding: 4px;
 }
 
+#houseResponse {
+  font-size: 32px;
+  background-image: url("https://www.hbo.com/content/dam/hbodata/series/game-of-thrones/episodes/6/game-of-thrones-6-3000x1688.jpg/_jcr_content/renditions/cq5dam.web.1200.675.jpeg");
+  background-size: cover;
+  border-radius: 10px;
+  padding: 4px;
+  line-height: 90px;
+}
+
 #modal-container {
     position: fixed;
     display: table;
