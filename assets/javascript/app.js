@@ -515,6 +515,11 @@ $(document).ready(function(){
         $("#navbarTitle").show();
 
     });
+
+    $("#translatorButton").on("click", function() {
+        $("#modalTranslation").empty();
+        $("#translateInput").empty();
+    });
     
     //click event for user pressing people or more people buttons
     $(".morePeople").on("click", function() {
