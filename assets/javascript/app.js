@@ -312,65 +312,22 @@ $(document).ready(function(){
     var quoteObj = {};
     var translateText = "";
 
-    // $(function() {
-    //     $(document).on("click", "#searchButton", function(e) {
-    //         e.preventDefault();
-    //         var request = gapi.client.youtube.search.list({
-    //             part: "snippet",
-    //             type: "video",
-    //             q: encodeURIComponent($("#searchInput").val()).replace(/%20/g, "+"),
-    //             maxResults: 5,
-    //             order: "viewCount",
-    //         });
+    var searchCharacterArray = Object.keys(characters);
+    console.log(searchCharacterArray);
 
-    //         request.execute(function(response) {
-    //         });
+     //click event for user pressing search button
+     $(document).on("click", "#searchButton", function(event){
+        event.preventDefault();
+        searchText = $("#searchInput").val().trim();
+        console.log(searchText)
+        var chosenCharacter = searchCharacterArray.find(function(element) {
+            return element == searchText;
+        });
+        console.log(chosenCharacter);
+        characterModalLaunch(chosenCharacter);
 
-    //         $("#recent-table").append("<tr><td>" + response + "</td></tr>");
-    //         $(".row").show();
-            
-    //     });
-    // });
-    
-    // function init() {
-    //     gapi.client.setApiKey("AIzaSyC5WIkYxb4L7c4mYmfB6UjfJ_EfYTJ2YaE");
-    //     gapi.client.load("youTube", "v3", function() {
+    });
 
-    //     });
-    // }
-    
-    // function videoSearch() {
-
-    //     $(document).on("click", "#searchButton", function(e) {
-    //         e.preventDefault();
-
-    //    
-    //     var apiKey = 'AIzaSyC5WIkYxb4L7c4mYmfB6UjfJ_EfYTJ2YaE';
-    //     var q = $('#searchInput').val();
-        
-    //         gapi.client.setApiKey(apiKey);
-    //         gapi.client.load('youtube', 'v3', function() {
-    //             isLoad = true;
-    //         }); 
-    //     
-        
-    //         request = gapi.client.youtube.search.list({
-    //             q: 'q',
-    //             part: 'id, snippet',
-    //             type: 'video',
-    //             order: 'date'
-    //         });
-    
-    //   request.execute(function(response) {
-    //     var str = JSON.stringify(response.result);
-    //     $('#translatedQuote').html('<pre>' + str + '</pre>');
-    //     $(".row").show();
-
-    //   });
-    // });
-    // }
-    
-    
     //creates the character cards from the characters object to put into the HTML
     function createCharactersDiv (character, characterIndex) {
         var charDiv = $("<div class='character' data-name='" + characterIndex + "'>");
@@ -552,29 +509,12 @@ $(document).ready(function(){
         newRow.append(cell,cell2);
         $("#quoteTable").prepend(newRow);
     });
-
-    // //click event for user search (stored in Firebase)
-    // $("#searchButton").on("click", function(event) {
-    //     event.preventDefault();
-    //     userSearch = $("#searchInput").val().trim();
-    //     database.ref().push({ 
-    //         searchterm: userSearch
-    //     });
-    //     $("#searchInput").val("");
-
-    //     //Database event for retrieving user search terms from Firebase and displaying them as recent searches in HTML
-    //     database.ref().on("child_added", function(childSnapshot) {
-    //         $("#recent-table").append("<tr><td>" + (childSnapshot.val().searchterm) + "</td></tr>");
-    //         $(".row").show();
-    //     });
-    // });
     
     $(".btn").on("click", function() {
         $(".jumbotron").hide();
         $("#navbarTitle").show();
 
     });
-    
     
     //click event for user pressing people or more people buttons
     $(".morePeople").on("click", function() {
@@ -654,10 +594,8 @@ $(document).ready(function(){
         showHideQuotes();
     });
 
-    //click event for user pressing a character picture
-    $("#charactersDiv").on("click", ".character", function characterModalLaunch() {
-
-        var chosenCharacter = $(this).attr("data-name");
+    function characterModalLaunch(chosenCharacter) {
+        
         var chosenCharFullName = characters[chosenCharacter].firstname + "+" + characters[chosenCharacter].lastname;
         var chosenCharSlug = characters[chosenCharacter].firstname + "_" + characters[chosenCharacter].lastname;
         var quoteURL = "https://got-quotes.herokuapp.com/quotes?char=" + chosenCharacter;
@@ -688,7 +626,12 @@ $(document).ready(function(){
             width: 250,
             height: 250
         });
+    };
 
+    //click event for user pressing a character picture
+    $("#charactersDiv").on("click", ".character", function() {
+        chosenCharacter = $(this).attr("data-name");
+        characterModalLaunch(chosenCharacter);
     });
 
     //click event for user pressing a house picture
