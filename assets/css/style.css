@@ -37,7 +37,10 @@ html ::-webkit-scrollbar {
     color: black;
 }
 
-
+#modalTranslation {
+  margin: 20px;
+  font-size: 16px;
+}
 
 #searchInput {
     background:rgba(0,0,0,0.3) !important;
@@ -46,7 +49,7 @@ html ::-webkit-scrollbar {
 
 #translateInput {
     width: 100%;
-    font-size: 12px;
+    font-size: 16px;
     background-color: rgb(236, 239, 244);
     word-spacing: 4px;
 }
@@ -59,7 +62,7 @@ html ::-webkit-scrollbar {
 }
 
 .modal-content {
-    background: none;
+    background: rgba(0, 0, 0, 0.8);
     border: none;
 }
 
@@ -85,10 +88,35 @@ html ::-webkit-scrollbar {
     padding: 0px;
 }
 
-img {
+#navbarTitle {
+  font-size: 20px;
+  color: yellow;
+}
+
+.characterImage {
 	height: 150px;
 	width: 150px;
 	border-radius: 10px;
+}
+
+#houseResponse {
+  font-size: 32px;
+  background-image: url("https://www.hbo.com/content/dam/hbodata/series/game-of-thrones/episodes/6/game-of-thrones-6-3000x1688.jpg/_jcr_content/renditions/cq5dam.web.1200.675.jpeg");
+  background-size: cover;
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.houseModalImage {
+  height: 350px;
+	width: 225px;
+}
+
+.housesImage {
+	height: 250px;
+	width: 175px;
+  border-radius: 10px;
+  margin: 10px;
 }
 
 .character {
@@ -97,6 +125,16 @@ img {
     margin: 10px;
     position: relative;
     font-size: 12px;
+}
+
+.house {
+  display: inline-block;
+  margin: 3px;
+  position: relative;
+}
+
+.characterName {
+
 }
 
 #quote {
@@ -122,15 +160,35 @@ img {
     margin: 0;
 }
 
+#housesDiv :hover {
+  opacity: 0.7;
+}
+
 .columnHead {
     color: yellow;
     padding-left: 8px;
     margin-top: 5px;
 }
+.columnHeadHouse {
+    color: yellow;
+    margin-top: 10px;
+    font-size: 16px;
+}
 
 .columnData {
     padding-left: 8px;
 }
+
+.columnDataHouse {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.columnHeadHouse {
+  font-size: 20px;
+  margin-top: 25px;
+}
+
 
 .footer {
     position: absolute;
@@ -153,6 +211,10 @@ img {
 /* css rules for main character modal */
 #characterModalGrid {
     text-align: left;
+}
+
+#characterModalImage {
+  border-radius: 10px;
 }
 
 #characterName {
@@ -199,8 +261,7 @@ img {
   }
   #modal-container .modal-background .modal2 {
     background: rgba(73, 106, 145, 0.8);
-    width: 80%;
-    height: 400px;
+    width: 60%;
     padding: 50px;
     display: inline-block;
     border-radius: 10px;

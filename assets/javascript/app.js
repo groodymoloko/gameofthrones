@@ -17,7 +17,10 @@ $(document).ready(function(){
     var uri = "";
 
     //hides page content until user selects something
-    $(".row").hide();
+    $(".charHideable").hide();
+    $(".houseHideable").hide();
+    $("#recentQuotesButton").hide();
+    $("#navbarTitle").hide();
 
     //create list of characters with properties (some characters will be in the quote database, others are local)
     var characters = {
@@ -282,12 +285,32 @@ $(document).ready(function(){
 			},
     }
 
+    var houses = {
+        "Stark": { image: "assets/images/houses/housestark.jpg" },
+        "Arryn": { image: "assets/images/houses/housearryn.jpg" },
+        "Martell": { image: "assets/images/houses/housemartell.jpg" },
+        "Clegane": { image: "assets/images/houses/houseclegane.jpg" },
+        "Greyjoy": { image: "assets/images/houses/housegreyjoy.jpg" },
+        "Karstark": { image: "assets/images/houses/housekarstark.jpg" },
+        "Lannister": { image: "assets/images/houses/houselannister.jpg" },
+        "Baratheon": { image: "assets/images/houses/housebaratheon.jpg" },
+        "Mormont": { image: "assets/images/houses/housemormont.jpg" },
+        "Swyft": { image: "assets/images/houses/houseswyft.jpg" },
+        "Tully": { image: "assets/images/houses/housetully.jpg" },
+        "Tyrell": { image: "assets/images/houses/housetyrell.jpg" },
+        "Westerling": { image: "assets/images/houses/housewesterling.jpg" },
+        "Hornwood": { image: "assets/images/houses/househornwood.jpg" },
+        "Crakehall": { image: "assets/images/houses/housecrakehall.jpg" }
+    }
+
     //copies the characters object so we can manipulate the keys in it and not affect the original
     var chosenPeopleObject = JSON.parse(JSON.stringify(characters));
+    var housesObject = JSON.parse(JSON.stringify(houses));
     //variable to store the text from user hitting search button entry
     var userSearch = "";
     //object that will be sent to firebase
     var quoteObj = {};
+    var translateText = "";
 
     // $(function() {
     //     $(document).on("click", "#searchButton", function(e) {
@@ -377,6 +400,33 @@ $(document).ready(function(){
         }
     }
 
+    //creates house cards from the houses object to put into the HTML
+    function createHousesDiv (house, housesIndex) {
+        var houseString = "House " + housesIndex
+        var houseDiv = $("<div class='house' data-name='" + houseString + "'>");
+        var housesImage = $("<img alt='image' class='housesImage'>").attr('src', house.image);
+        houseDiv.append(housesImage);
+        //remove the current character from the object so it does not have chance to repeat in next loop
+        delete housesObject[housesIndex];
+        
+        return houseDiv;
+    }
+    
+    // shows the houses available in the object
+     function showHouses() { 
+        if (Object.keys(housesObject).length === 0) {
+            housesObject = JSON.parse(JSON.stringify(houses));
+        }
+        $('#housesDiv').empty();
+        for (var i = 0; i < 5 && Object.keys(housesObject).length !== 0; i++) {
+            var housesArray = Object.keys(housesObject);
+            var housesIndex = housesArray[(Math.floor(Math.random() * housesArray.length))];
+            var house = housesObject[housesIndex];
+            var houseDiv = createHousesDiv(house, housesIndex);
+            $('#housesDiv').append(houseDiv);
+        }
+    }
+
     //query the Game of Thrones Quote API to get a quote by the chosen character
     function fetchQuote(quoteURL, chosenCharacter) {
         $.ajax({
@@ -420,15 +470,15 @@ $(document).ready(function(){
             var translatedQuote = response.contents.translated;
             // addToTable(translatedQuote);
             $("#translatedQuote").text(translatedQuote);
-            });
+            $("#modalTranslation").text(translatedQuote);
+            quoteObj.trans = translatedQuote;
+            database.ref().push(quoteObj);
 
-        quoteObj.trans = translatedQuote;
-        console.log(quoteObj.trans);
-        database.ref().push(quoteObj);
+            });
     }
 
     //clears the character modal to prepare for the new character that was chosen
-    function emptyCharModal() {
+    function emptyModal() {
         $("#characterTitles").empty();
         $("#characterBorn").empty();
         $("#characterAliases").empty();
@@ -437,6 +487,14 @@ $(document).ready(function(){
         $("#characterImage").empty();
         $("#characterQuote").empty();
         $("#characterName").empty();
+        $("#houseResponseLord").empty();
+        $("#houseResponseWords").empty();
+        $("#houseResponseRegion").empty();
+        $("#chosenHouse").empty();
+        $("#houseResponse").hide();
+        $("#characterModalGrid").hide();
+        $("#houseImage").empty();
+
     }
     
     //query the Fire and Ice API to get specific chosen character information
@@ -488,11 +546,11 @@ $(document).ready(function(){
         var cell = $("<div>").addClass("col-lg-6");
         var cell2 = $("<div>").addClass("col-lg-6");
         var q = $("<div>").text(childSnapshot.val().quote).addClass("tableContent");
-        var t = $("<div>").text(childSnapshot.val().translated).addClass("tableContent");
+        var t = $("<div>").text(childSnapshot.val().trans).addClass("tableContent");
         cell.append(q);
         cell2.append(t);
         newRow.append(cell,cell2);
-        $("#quoteTable").append(newRow);
+        $("#quoteTable").prepend(newRow);
     });
 
     // //click event for user search (stored in Firebase)
@@ -510,21 +568,85 @@ $(document).ready(function(){
     //         $(".row").show();
     //     });
     // });
+    
+    $(".btn").on("click", function() {
+        $(".jumbotron").hide();
+        $("#navbarTitle").show();
 
-    //click event for user pressing people button
-    $("#peopleButton").on("click", function() {
-        showCharacters();
-        $(".row").show();
     });
+    
+    
+    //click event for user pressing people or more people buttons
+    $(".morePeople").on("click", function() {
+        showCharacters();
+        $(".charHideable").show();
+        $("#charactersDiv").show();$
+        ("#morePeopleButton").show();
+        $("#showAllPeopleButton").show();
+    });
+
+    $("#hidePeopleButton").on("click", function() {
+        $(".charHideable").hide();
+        $("#charactersDiv").hide();
+    });
+    
+    $("#showAllPeopleButton").on("click", function() {
+        $("#charactersDiv").empty();
+        for (var i = 0; i < Object.keys(characters).length; i++) {
+            //turn object into array so we can index it with random number
+            var characterArray = Object.keys(characters);
+            var characterIndex = characterArray[i];
+            var character = characters[characterIndex];
+            var charDiv = createCharactersDiv(character, characterIndex);
+            $('#charactersDiv').append(charDiv);
+        }
+        $("#morePeopleButton").hide();
+        $("#showAllPeopleButton").hide();
+    });
+
+    $(".moreHouses").on("click", function() {
+        showHouses();
+        $(".houseHideable").show();
+        $("#housesDiv").show();$
+        ("#moreHousesButton").show();
+        $("#showAllHousesButton").show();
+    });
+
+    $("#hideHousesButton").on("click", function() {
+        $(".houseHideable").hide();
+        $("#housesDiv").hide();
+    });
+
+    $("#showAllHousesButton").on("click", function() {
+        $("#housesDiv").empty();
+        for (var i = 0; i < Object.keys(houses).length; i++) {
+            //turn object into array so we can index it with random number
+            var housesArray = Object.keys(houses);
+            var housesIndex = housesArray[i];
+            var house = houses[housesIndex];
+            var houseDiv = createHousesDiv(house, housesIndex);
+            $('#housesDiv').append(houseDiv);
+        }
+        $("#moreHousesButton").hide();
+        $("#showAllHousesButton").hide();
+    });
+
+    $("#quotesButton").on("click", function() {
+        $("#recentQuotesButton").show();
+        showHideQuotes();
+    });
+        
 
     //click event for user pressing translator button
     $(document).on("click", "#translateButton", function(event){
         event.preventDefault();
-        var translateText = $("#translateInput").val().trim();
+        $("#translateInput").empty();
+        $("#modalTranslation").empty();
+        translateText = $("#translateInput").val().trim();
         uri = "https://api.funtranslations.com/translate/dothraki.json?text=" + encodeURIComponent(translateText);
-        // fetchTranslation(uri);
-        $(".row").show();
-        $("#translateModal").modal("hide");
+        quoteObj.quote = translateText;
+        fetchTranslation(uri);
+        // $("#translateModal").modal("hide");
     });
 
     //click event for user pressing show or hide recent quotes
@@ -552,12 +674,13 @@ $(document).ready(function(){
         fetchQuote(quoteURL, chosenCharacter);
 
         //retrieves information from APIs on character for the character modal
-        emptyCharModal();
+        emptyModal();
         fetchCharInfo1(charInfoURL1);
         fetchCharInfo2(charInfoURL2);
 
         //create character div with name and image and send to modal
         var charModalImage = $("<img alt='image' class='characterModalImage'>").attr('src', characters[chosenCharacter].image);
+        $("#characterModalGrid").show();
         $("#characterImage").append(charModalImage);
         $("#characterName").text(characters[chosenCharacter].firstname + " " + characters[chosenCharacter].lastname);
         //make picture larger for modal
@@ -568,18 +691,14 @@ $(document).ready(function(){
 
     });
 
-    // code for clicking out of the modal
-    $('#modal-container').click(function(){
-        $(this).addClass('out');
-        $('body').removeClass('modal-active');
-    });
-
-
-     //click event for user pressing a house picture
-     $(".gallery").on("click", function() {
+    //click event for user pressing a house picture
+    $("#housesDiv").on("click", ".house", function houseModalLaunch() {
 
         //get name attribute of clicked divs and save to variable
         var chosenHouse = ($(this).attr("data-name"));
+        var currentImage = this.getElementsByTagName('img')[0];
+        var currentSource = $(currentImage).attr("src");
+
         //take name + api url to form query and store in variable
         var housesURL = "https://api.got.show/api/houses/" + encodeURIComponent(chosenHouse);
 
@@ -592,21 +711,31 @@ $(document).ready(function(){
                     // After data comes back from the request
                     .then(function(response) {
                     //clear out the Divs
-                    $("#houseResponseLord").empty();
-                    $("#houseResponseWords").empty();
-                    $("#houseResponseRegion").empty();
+                    emptyModal();
                     // storing the data from the AJAX request in the variables
                     var houseResponseWords = response.data.words;
                     var houseResponseRegion = response.data.region;
                     var houseResponseLord = response.data.currentLord;
+                    var houseModalImage = $("<img alt='image' class='houseModalImage'>").attr('src', currentSource);
                     //take response and write to div
-                    $("#houseResponseLord").append("Current Lord Of the House:", houseResponseLord);
-                    $("#houseResponseWords").append("Words Of the House:", houseResponseWords);
-                    $("#houseResponseRegion").append("Region of The House:", houseResponseRegion);
+                    $("#houseImage").append(houseModalImage);
+                    $("#chosenHouse").append(chosenHouse);
+                    $("#houseResponseLord").append(houseResponseLord);
+                    $("#houseResponseWords").append(houseResponseWords);
+                    $("#houseResponseRegion").append(houseResponseRegion);
+                    $('#modal-container').removeAttr('class').addClass('one');
+                    $('body').addClass('modal-active');
+                    $("#houseResponse").show();
                     // console.log("FINALITY", houseResponse);
                         });
                 }
                 fetchHouses(housesURL);
         })
+
+    // code for clicking out of the modal
+    $('#modal-container').click(function(){
+        $(this).addClass('out');
+        $('body').removeClass('modal-active');
+    });
 
 });
