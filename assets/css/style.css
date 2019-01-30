@@ -1,18 +1,25 @@
 html {
     position: relative;
     min-height: 100%;
+    box-sizing: border-box;
+    /* margin-left: calc(100vw - 100%); */
+    /* margin-right: 0; */
 }
 
 body {
     margin: auto;
     text-align: center;
     color: white;
-    font-size: 14px;
+    font-size: 12px;
     font-family: got;
     margin-bottom: 50px; /* Margin bottom for sticky footer */
     margin-right: 0px;
     margin-left: 0px;
     word-spacing: 4px;
+}
+
+html ::-webkit-scrollbar {
+  display: none;
 }
 
 #navbarContainer {
@@ -29,6 +36,8 @@ body {
     background:white !important;
     color: black;
 }
+
+
 
 #searchInput {
     background:rgba(0,0,0,0.3) !important;
@@ -96,6 +105,17 @@ img {
     border-radius: 10px;
 }
 
+#quoteTable {
+  display: none;
+  height: 500px;
+  width: 1000px;
+  overflow-y: auto;
+}
+
+#quoteTable ::-webkit-scrollbar {
+  display: block;
+}
+
 #qTable{
     font-size: 12px;
     background:  rgba(53, 50, 44, 0.7);
@@ -104,11 +124,12 @@ img {
 
 .columnHead {
     color: yellow;
+    padding-left: 8px;
+    margin-top: 5px;
 }
 
-#characterModal {
-    text-align: left;
-    
+.columnData {
+    padding-left: 8px;
 }
 
 .footer {
@@ -121,9 +142,39 @@ img {
     color: rgb(197, 191, 178);
 }
 
+/* css rules for the quote table */
+.tableContent {
+  background: rgba(73, 106, 145, 0.8);
+  margin: 5px 0 5px 0;
+  padding: 10px;
+  border-radius: 10px;
+}
+/*css rules for house modal*/
+#houseResonse {
+    display: grid;
+    
+}
 /* css rules for main character modal */
 #characterModalGrid {
     text-align: left;
+}
+
+#characterName {
+  font-size: 16px;
+  justify-content: center;
+  background-color: grey;
+  width: 250px;
+  border-radius: 10px;
+  padding: 4px;
+}
+
+#houseResponse {
+  font-size: 32px;
+  background-image: url("https://www.hbo.com/content/dam/hbodata/series/game-of-thrones/episodes/6/game-of-thrones-6-3000x1688.jpg/_jcr_content/renditions/cq5dam.web.1200.675.jpeg");
+  background-size: cover;
+  border-radius: 10px;
+  padding: 4px;
+  line-height: 90px;
 }
 
 #modal-container {
@@ -160,9 +211,8 @@ img {
     vertical-align: middle;
   }
   #modal-container .modal-background .modal2 {
-    background: rgba(105, 83, 83, 0.8);
+    background: rgba(73, 106, 145, 0.8);
     width: 80%;
-    height: 400px;
     padding: 50px;
     display: inline-block;
     border-radius: 10px;
